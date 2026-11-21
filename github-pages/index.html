@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Nurdin Fajarianto</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Industrial Engineering graduate — process improvement, supply chain and predictive maintenance (CNN-GRU).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one plant-control-room column; a blueprint grid behind the hero, everything else on calm graphite. Deliberately dark-only to match the showreel. */
+:root {
+  --bg: #0B0E13;
+  --surface: #131922;
+  --surface-2: #1A212C;
+  --line: rgba(255, 255, 255, 0.10);
+  --fg: #EEF1F5;
+  --muted: #9AA4B2;
+  --amber: #FFB020;
+  --orange: #FF6B35;
+  --steel: #5AA9E6;
+  --green: #3DDC97;
+  --plate: #FFFFFF;
+  --grid: rgba(255, 176, 32, 0.07);
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --max: 1120px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--max); margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+p { margin: 0; }
+.eyebrow { font: 600 12px/1.4 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); }
+.muted { color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 0 max(16px, env(safe-area-inset-left, 0px)); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
+.brand { font: 700 16px var(--display); letter-spacing: 0.02em; text-decoration: none; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.nav ul a { text-decoration: none; color: var(--muted); }
+.nav ul a:hover { color: var(--fg); }
+
+/* hero */
+.hero { position: relative; padding-block: 72px 56px; }
+.hero::before { content: ""; position: absolute; inset: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); z-index: -1;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px; mask-image: radial-gradient(70% 80% at 30% 40%, #000, transparent); }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1; margin-top: 18px; }
+.role { font: 500 15px/1.5 var(--mono); color: var(--muted); margin-top: 18px; letter-spacing: 0.02em; }
+.lede { font-size: 19px; max-width: 34em; margin-top: 22px; }
+.open { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chip { font: 600 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 11px; border: 1px solid var(--line); border-radius: 6px; color: var(--fg); background: var(--surface); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px var(--body); padding: 12px 18px; border-radius: 10px; text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--amber); color: #1A1206; border-color: var(--amber); }
+.reel { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+.reel video { display: block; width: 100%; aspect-ratio: 16 / 9; }
+.reel-cap { font: 500 12px var(--mono); color: var(--muted); margin-top: 10px; letter-spacing: 0.06em; }
+
+/* figures */
+.figures { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 56px; }
+.fig { padding: 22px 22px 20px; background: var(--surface); }
+.fig + .fig { border-left: 1px solid var(--line); }
+.fig .v { font: 600 34px/1 var(--mono); }
+.fig .k { font-size: 14px; margin-top: 10px; }
+.fig .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+section { padding-block: 72px; border-top: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 32px; margin-bottom: 36px; }
+.head h2 { font-size: clamp(28px, 3.6vw, 40px); margin-top: 10px; }
+.head p { max-width: 36em; }
+
+/* thesis */
+.thesis { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.pipe { display: grid; grid-template-columns: auto 1fr; gap: 14px 18px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.pipe .lbl { font: 600 11px var(--mono); letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+.sensors { display: flex; flex-wrap: wrap; gap: 6px; }
+.sensors span { font: 500 13px var(--mono); padding: 6px 9px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--steel) 45%, transparent); color: var(--steel); }
+.stage { font: 700 18px var(--display); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--orange); color: var(--orange); width: fit-content; }
+.stage.out { border-color: var(--amber); color: var(--amber); }
+.bands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.band { border-radius: 8px; padding: 10px; background: var(--surface-2); }
+.band b { display: block; font: 600 11px var(--mono); letter-spacing: 0.14em; }
+.band span { font: 600 15px var(--mono); }
+.r2 { display: flex; align-items: baseline; gap: 14px; margin-top: 8px; }
+.r2 .v { font: 600 64px/1 var(--mono); color: var(--amber); letter-spacing: -0.03em; }
+.thesis ul { margin: 22px 0 0; padding-left: 18px; display: grid; gap: 8px; }
+
+/* projects */
+.projects { display: grid; gap: 28px; }
+.proj { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 32px; }
+.proj:nth-child(even) .media { order: 2; }
+.proj .tag { font: 600 12px var(--mono); letter-spacing: 0.16em; text-transform: uppercase; }
+.proj h3 { font-size: 28px; margin-top: 10px; }
+.proj p { margin-top: 14px; color: color-mix(in srgb, var(--fg) 85%, transparent); }
+.proj .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.media { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+.media .cap { font: 500 11px var(--mono); letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; text-align: center; }
+.phone { width: min(260px, 100%); border-radius: 38px; padding: 10px; background: #050608; border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0,0,0,0.55); }
+.phone > * { display: block; width: 100%; border-radius: 30px; aspect-ratio: 384 / 848; object-fit: cover; background: #fff; }
+.shot { width: min(300px, 100%); }
+.trio { display: flex; gap: 14px; align-items: center; justify-content: center; width: 100%; }
+.trio img { width: 31%; max-width: 170px; aspect-ratio: 220 / 287; object-fit: cover; border-radius: 12px; background: var(--plate); border: 2px solid var(--c, var(--orange)); box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
+.trio img:nth-child(2) { transform: translateY(24px); }
+
+/* experience */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 140px 150px 1fr; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.timeline li:first-child { border-top: 1px solid var(--line); }
+.when { font: 600 13px var(--mono); color: var(--muted); letter-spacing: 0.04em; }
+.plate { height: 64px; border-radius: 10px; background: var(--plate); display: flex; align-items: center; justify-content: center; padding: 8px 12px; }
+.plate img { max-height: 100%; max-width: 100%; object-fit: contain; }
+.plate.sq img { height: 52px; width: 52px; object-fit: cover; }
+.plate.wide { overflow: hidden; }
+.plate.wide img { width: 120px; height: 50px; object-fit: cover; }
+.timeline h3 { font-size: 20px; }
+.timeline .r { font-weight: 600; margin-top: 2px; }
+.timeline .n { color: var(--muted); margin-top: 4px; font-size: 15px; }
+
+/* skills + certs */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.skillset { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.certs { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+.certs li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.certs b { font-weight: 600; }
+.certs .y { font: 600 14px var(--mono); color: var(--amber); grid-row: span 2; align-self: center; }
+.certs span { color: var(--muted); font-size: 14px; }
+
+/* contact */
+.contact { text-align: left; }
+.contact h2 { font-size: clamp(34px, 5vw, 56px); }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 30px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card .v { font: 500 15px var(--mono); overflow-wrap: anywhere; }
+.card .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.card .btn { padding: 8px 12px; font-size: 13px; }
+footer { padding-block: 32px 48px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+
+@media (max-width: 860px) {
+  .hero-grid, .thesis, .proj, .two { grid-template-columns: 1fr; }
+  .proj:nth-child(even) .media { order: 0; }
+  .figures { grid-template-columns: 1fr 1fr; }
+  .fig:nth-child(3) { border-left: 0; }
+  .fig:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .cards { grid-template-columns: 1fr; }
+  .timeline li { grid-template-columns: 1fr; gap: 10px; }
+  .plate { width: 150px; }
+  .nav ul { display: none; }
+  .proj { padding: 22px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 0.7s cubic-bezier(.16,1,.3,1) both; }
+  .rise.d2 { animation-delay: 0.08s; } .rise.d3 { animation-delay: 0.16s; }
+  @keyframes rise { from { transform: translateY(14px); } to { transform: none; } }
+}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">NURDIN FAJARIANTO</a>
+    <ul>
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="rise">
+        <div class="eyebrow">Industrial Engineering · Universitas Muhammadiyah Malang · 2026</div>
+        <h1>Nurdin Fajarianto</h1>
+        <p class="role">Process Improvement · Supply Chain · Predictive Maintenance</p>
+        <p class="lede">Industrial Engineering graduate who combines a process-improvement mindset with data-driven analysis. His thesis model runs on real refinery sensor data, and he built an offline iOS app that puts it to work.</p>
+        <div class="open" aria-label="Open to roles">
+          <span class="chip">Management Trainee</span><span class="chip">Production</span><span class="chip">PPIC</span><span class="chip">Quality</span><span class="chip">Supply Chain</span><span class="chip">Operations</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See projects</a>
+          <a class="btn" href="https://www.linkedin.com/in/nurdin-fajarianto" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="rise d2">
+        <div class="reel">
+          <video src="assets/portfolio.mp4" poster="assets/poster.jpg" controls playsinline preload="metadata" aria-label="Portfolio showreel video, 67 seconds"></video>
+        </div>
+        <p class="reel-cap">SHOWREEL · 1:07</p>
+      </div>
+    </div>
+
+    <div class="figures rise d3">
+      <div class="fig"><div class="v num" style="color:var(--amber)">0.9971</div><div class="k">R² accuracy</div><div class="s">CNN-GRU RUL model (thesis)</div></div>
+      <div class="fig"><div class="v num" style="color:var(--orange)">11</div><div class="k">Engineered features</div><div class="s">End-to-end data pipeline</div></div>
+      <div class="fig"><div class="v num" style="color:var(--steel)">±50</div><div class="k">Committee led</div><div class="s">Event Chair, Rector Cup UMM 2025</div></div>
+      <div class="fig"><div class="v num" style="color:var(--green)">3.49</div><div class="k">GPA / 4.00</div><div class="s">Industrial Engineering, UMM</div></div>
+    </div>
+  </header>
+
+  <section id="thesis">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Featured · Undergraduate thesis · Nov 2025 – May 2026</div>
+        <h2>Remaining Useful Life forecasting with a hybrid CNN-GRU</h2>
+      </div>
+      <p class="muted">Crude Distillation Unit, PPSDM Migas Cepu. Benchmarked against a CNN-LSTM baseline; RUL predictions are turned into maintenance-scheduling thresholds.</p>
+    </div>
+    <div class="thesis">
+      <div class="pipe" aria-label="Model pipeline">
+        <span class="lbl">Sensors</span>
+        <div class="sensors"><span>ΔT heat exchanger · °C</span><span>Pressure drop · bar</span><span>Pump head · m</span><span>Motor current · A</span></div>
+        <span class="lbl">Features</span>
+        <div class="muted">11 engineered features · time-series sequencing · Gaussian-noise augmentation</div>
+        <span class="lbl">Model</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="stage">CNN</span><span class="stage">GRU</span><span class="stage out">RUL (days)</span></div>
+        <span class="lbl">Decision</span>
+        <div class="bands">
+          <div class="band"><b style="color:var(--green)">NORMAL</b><span>&gt; 130 d</span></div>
+          <div class="band"><b style="color:var(--amber)">DEGRADING</b><span>125–130 d</span></div>
+          <div class="band"><b style="color:var(--orange)">CRITICAL</b><span>&lt; 125 d</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:var(--muted)">Model accuracy</div>
+        <div class="r2"><span class="v">0.9971</span><span class="muted">R² on thesis test data</span></div>
+        <ul class="muted">
+          <li>Real sensor data from the CDU at PPSDM Migas Cepu, where the internship took place.</li>
+          <li>End-to-end pipeline in Python (Google Colab): preprocessing, feature engineering, sequencing.</li>
+          <li>Extended into an offline iOS app at Apple Developer Academy @ UC Surabaya.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Projects</div>
+        <h2>From model to app to machine</h2>
+      </div>
+    </div>
+    <div class="projects">
+      <article class="proj">
+        <div class="media">
+          <img class="shot" src="assets/rul-app.png" alt="RUL Predictor home screen showing 126 days RUL, status Menurun, and four sensor cards">
+          <div class="cap">UI preview · rebuilt from SwiftUI source · real CDU dataset</div>
+        </div>
+        <div>
+          <div class="tag" style="color:var(--amber)">Apple Developer Academy @ UC · Oct – Nov 2026</div>
+          <h3>RUL Predictor iOS App</h3>
+          <p>Offline iOS app that runs the thesis CNN-GRU model on-device with Core ML, turning CDU sensor inputs into RUL estimates and maintenance decisions. Tabs for Home, Predict, Decision, History and More, with iPhone and iPad layouts.</p>
+          <div class="chips"><span class="chip">SwiftUI</span><span class="chip">SwiftData</span><span class="chip">Core ML</span><span class="chip">100% offline</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="media">
+          <div class="phone"><video src="assets/planner.mp4" autoplay muted loop playsinline aria-label="Screen recording of the planner app's monthly calendar"></video></div>
+          <div class="cap">Screen recording</div>
+        </div>
+        <div>
+          <div class="tag" style="color:var(--steel)">Apple Foundation Program · CBL challenge</div>
+          <h3>Event &amp; Reminder Planner App</h3>
+          <p>Challenge-Based Learning project: a native planner with events, reminders, categories, priorities and a monthly calendar view.</p>
+          <div class="chips"><span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">Xcode</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="media">
+          <div class="trio" style="--c:var(--orange)">
+            <img src="assets/apctic1.jpg" alt="APCTIC 3D render, front three-quarter view">
+            <img src="assets/apctic2.jpg" alt="APCTIC 3D render, side view">
+            <img src="assets/apctic3.jpg" alt="APCTIC 3D render with hopper">
+          </div>
+        </div>
+        <div>
+          <div class="tag" style="color:var(--orange)">Group project · Kelompok D2</div>
+          <h3>APCTIC — Apple Precision Cutting Automatic</h3>
+          <p>Semi-automatic apple-chip slicer for UD. Prioritas, replacing manual cutting with a motor-driven blade for faster, uniform slices.</p>
+          <div class="chips"><span class="chip">Engineering design method</span><span class="chip">Time &amp; motion study</span><span class="chip">Anthropometry</span><span class="chip">Engineering economics</span><span class="chip">Experimental testing</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="media">
+          <div class="trio" style="--c:var(--green)">
+            <img src="assets/incub1.jpg" alt="Stainless-steel tempeh incubator on the exhibition table">
+            <img src="assets/incub2.jpg" alt="Banner: Inkubator Tempe Berbasis IoT">
+            <img src="assets/incub3.jpg" alt="Exhibition booth with the incubator and banner">
+          </div>
+        </div>
+        <div>
+          <div class="tag" style="color:var(--green)">Product Design &amp; Development · Oct 2024 – Jan 2025</div>
+          <h3>IoT Tempeh Fermentation Incubator</h3>
+          <p>IoT incubator for a local SME that keeps fermentation at <span class="num">31–33&nbsp;°C</span> with real-time temperature and humidity monitoring from a smartphone.</p>
+          <div class="chips"><span class="chip">DHT11</span><span class="chip">ESP8266</span><span class="chip">IoT monitoring</span><span class="chip">SME / UMKM</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Experience</div>
+        <h2>Plant floor, campus, and Apple Academy</h2>
+      </div>
+    </div>
+    <ol class="timeline">
+      <li><span class="when">OCT – NOV 2026</span><span class="plate wide"><img src="assets/uc-ada.png" alt="UC and Apple Developer Academy logo"></span>
+        <div><h3>Apple Developer Academy @ UC Surabaya</h3><div class="r">Learner, Apple Foundation Program</div><div class="n">Built an offline iOS app from the thesis with Swift and SwiftUI.</div></div></li>
+      <li><span class="when">JAN – JUL 2026</span><span class="plate sq"><img src="assets/umm.png" alt="Universitas Muhammadiyah Malang logo"></span>
+        <div><h3>Faculty of Agriculture &amp; Animal Science, UMM</h3><div class="r">Faculty Administration Intern</div><div class="n">Scheduling, data and meeting documentation; supported a Centre of Excellence partnership with a Japanese university.</div></div></li>
+      <li><span class="when">2025</span><span class="plate sq"><img src="assets/umm.png" alt="Universitas Muhammadiyah Malang logo"></span>
+        <div><h3>Rector Cup UMM 2025</h3><div class="r">Event Chair</div><div class="n">Led a committee of about 50 for an inter-faculty competition with 12 faculties.</div></div></li>
+      <li><span class="when">FEB – MAR 2025</span><span class="plate"><img src="assets/ppsdm.png" alt="PPSDM Migas logo"></span>
+        <div><h3>PPSDM Migas Cepu</h3><div class="r">Instrumentation Workshop Intern</div><div class="n">Monitored CDU and boiler operation, repaired valves, worked around PLC and DCS monitoring.</div></div></li>
+      <li><span class="when">JUN 2024 – JUN 2025</span><span class="plate sq"><img src="assets/umm.png" alt="Universitas Muhammadiyah Malang logo"></span>
+        <div><h3>UKM Pencak Silat UMM</h3><div class="r">Head of Organization</div><div class="n">Designed cadre-development and leadership training programs.</div></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="two">
+      <div>
+        <div class="eyebrow">Skills &amp; tools</div>
+        <div class="skillset">
+          <span class="chip">Process improvement</span><span class="chip">Supply chain</span><span class="chip">Quality engineering</span><span class="chip">Predictive maintenance</span><span class="chip">Data analysis</span><span class="chip">Deep learning · CNN-GRU</span><span class="chip">Python</span><span class="chip">Swift &amp; SwiftUI</span><span class="chip">AutoCAD &amp; Inventor</span><span class="chip">WinQSB</span><span class="chip">Odoo</span><span class="chip">SPSS</span>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Certifications &amp; recognition</div>
+        <ul class="certs">
+          <li><b>Foundation Program</b><span class="y">2026</span><span>Apple Developer Academy @ UC Surabaya</span></li>
+          <li><b>Autodesk Inventor</b><span class="y">2025</span><span>Certificate of Completion</span></li>
+          <li><b>3rd Place · Combat Class C Adult</b><span class="y">2024</span><span>Pencak Silat, Rector Cup UMM</span></li>
+          <li><b>Operations Staff</b><span class="y">2025</span><span>Kejurnas Raja Brawijaya Open VI</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="eyebrow">Contact</div>
+    <h2>Let's work together.</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="eyebrow" style="color:var(--muted)">Email</span>
+        <span class="v" id="email">nurdinfajarianto10@gmail.com</span>
+        <div class="row"><button class="btn" type="button" id="copy-email">Copy email</button></div>
+      </div>
+      <div class="card">
+        <span class="eyebrow" style="color:var(--muted)">LinkedIn</span>
+        <span class="v">linkedin.com/in/nurdin-fajarianto</span>
+        <div class="row"><a class="btn" href="https://www.linkedin.com/in/nurdin-fajarianto" target="_blank" rel="noopener">Open profile ↗</a></div>
+      </div>
+      <div class="card">
+        <span class="eyebrow" style="color:var(--muted)">Based in</span>
+        <span class="v">Surabaya, Indonesia</span>
+        <span class="muted" style="font-size:14px">Open to Surabaya, Sidoarjo, Gresik, Pasuruan and Jabodetabek</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Nurdin Fajarianto · Industrial Engineering, Universitas Muhammadiyah Malang</footer>
+
+<script>
+document.getElementById("copy-email").addEventListener("click", function (e) {
+  const btn = e.currentTarget;
+  const text = document.getElementById("email").textContent;
+  const done = (msg) => { btn.textContent = msg; setTimeout(() => (btn.textContent = "Copy email"), 1800); };
+  const select = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("email")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); done("Selected — press Ctrl+C"); };
+  try { navigator.clipboard.writeText(text).then(() => done("Copied"), select); } catch (_) { select(); }
+});
+</script>
+
+</body>
+</html>
